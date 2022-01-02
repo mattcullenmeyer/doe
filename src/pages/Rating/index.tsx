@@ -1,0 +1,129 @@
+import React, { useEffect } from 'react';
+import { styled } from '@mui/material/styles';
+import { Box, Card, CardContent, CircularProgress, Container, Grid, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
+import { RatingCard } from './components/RatingCard';
+import { School, SuggestedSchools } from './components/SuggestedSchools';
+import { useParams, useLocation } from 'react-router-dom';
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  majorColor: theme.palette.text.secondary,
+}));
+
+const schools: School[] = [
+  {
+    uid: 6957,
+    slug: 'university-prep-steel-st',
+    name: "University Prep - Steele St.",
+    address: "3230 East 38th Avenue Denver, CO 80205",
+    rating: 53.0,
+  },
+  {
+    uid: 8945,
+    slug: 'university-prep-arapahoe-st',
+    name: "University Prep - Arapahoe St.",
+    address: "2409 Arapahoe Street Denver, CO 80205",
+    rating: 71.8,
+  },
+  {
+    uid: 3778,
+    slug: 'international-academy-denver-harrington',
+    name: "International Academy of Denver at Harrington",
+    address: "2401 East 37th Avenue Denver, CO 80205",
+    rating: 50.7,
+  },
+  {
+    uid: 1846,
+    slug: 'columbine-elementary-school',
+    name: "Columbine Elementary School",
+    address: "2540 East 29th Ave Denver, CO 80205",
+    rating: 43.2,
+  }
+];
+
+export const Rating: React.FC = () => {
+  const location = useLocation();
+
+  interface Params {
+    slug: string;
+  }
+
+  const { slug } = useParams<Params>();
+
+  useEffect(() => {
+    console.log(`location changed to ${slug}`);
+  }, [location])
+
+  return (
+    <Container maxWidth="xl">
+      <Typography variant="h4" gutterBottom component="h1">Wyatt Academy</Typography>
+      <Typography variant="h6" gutterBottom component="h2">3620 Franklin Street Denver, CO 80205</Typography>
+      <div style={{ display: 'flex', gap: '20px' }}>
+        <div style={{ display: 'flex', flex: '1 1 75%', flexFlow: 'column wrap', gap: '20px' }}>
+          <div style={{ display: 'flex', flex: '1 0 auto', gap: '20px' }}>
+            <div style={{ display: 'flex', flex: '1 1 60%' }}>
+              <RatingCard 
+                title='Overall Academic Performance'
+                rating={77.7}
+                pointsEarned='77.7'
+                pointsAvailable='100'
+                majorColor='#2f87fc'
+                minorColor='#9ac9f8'
+                order={1}
+              />
+            </div>
+            <div style={{ display: 'flex', flex: '1 1 40%', flexFlow: 'column wrap', gap: '20px' }}>
+              <RatingCard 
+                title={'Academic Growth'} 
+                rating={96.2}
+                pointsEarned={'57.7'}
+                pointsAvailable={'60'}
+                majorColor='#d73f78'
+                minorColor='#edc8d9'
+                order={2}
+                minor
+              />
+              <RatingCard 
+                title={'Academic Achievement'} 
+                rating={50.0}
+                pointsEarned={'20.0'}
+                pointsAvailable={'40'}
+                majorColor='#474797'
+                minorColor='#8a8eca'
+                order={3}
+                minor
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', flex: '1 0 auto', gap: '20px' }}>
+            <Card sx={{ order: 4, flex: '1 1 60%' }} raised>
+              <CardContent>
+                <Typography variant="h6" component="div"> 
+                  Historical Academic Performance
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card sx={{ order: 5, flex: '1 1 40%' }} raised>
+              <CardContent>
+                <Typography variant="h6" component="div"> 
+                  School Stats
+                </Typography>
+              </CardContent>
+            </Card>
+          </div>
+        </div> 
+        <div style={{ display: 'flex', flex: '1 1 25%' }}>
+          <Card sx={{ order: 6, flex: '1 0 auto' }} raised>
+            <CardContent>
+              <Typography variant="h6" component="div"> 
+                Suggested Schools
+              </Typography>
+              <SuggestedSchools schools={schools} />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </Container>
+  )
+}
