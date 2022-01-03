@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import { Box, Card, CardContent, CircularProgress, Container, Grid, List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
+import { 
+  Card, 
+  CardContent, 
+  Container, 
+  Typography 
+} from '@mui/material';
 import { RatingCard } from './components/RatingCard';
 import { School, SuggestedSchools } from './components/SuggestedSchools';
 import { useParams, useLocation } from 'react-router-dom';
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  majorColor: theme.palette.text.secondary,
-}));
+import { StatsTable } from './components/StatsTable';
 
 const schools: School[] = [
   {
@@ -57,38 +56,45 @@ export const Rating: React.FC = () => {
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" gutterBottom component="h1">Wyatt Academy</Typography>
-      <Typography variant="h6" gutterBottom component="h2">3620 Franklin Street Denver, CO 80205</Typography>
+      <Typography variant="h4" component="h1">Wyatt Academy</Typography>
+      <Typography variant="subtitle1" gutterBottom component="h2">3620 Franklin Street Denver, CO 80205</Typography>
       <div style={{ display: 'flex', gap: '20px' }}>
-        <div style={{ display: 'flex', flex: '1 1 75%', flexFlow: 'column wrap', gap: '20px' }}>
-          <div style={{ display: 'flex', flex: '1 0 auto', gap: '20px' }}>
-            <div style={{ display: 'flex', flex: '1 1 60%' }}>
-              <RatingCard 
+        {/* Column One */}
+        <div style={{ display: 'flex', flex: '1 1 40%', flexFlow: 'column wrap', gap: '20px' }}>
+          
+          {/* Row One */}
+          <div>
+            <RatingCard 
                 title='Overall Academic Performance'
                 rating={77.7}
-                pointsEarned='77.7'
-                pointsAvailable='100'
+                pointsEarned={77.7}
+                pointsAvailable={100}
                 majorColor='#2f87fc'
                 minorColor='#9ac9f8'
                 order={1}
-              />
-            </div>
-            <div style={{ display: 'flex', flex: '1 1 40%', flexFlow: 'column wrap', gap: '20px' }}>
+            />
+          </div>
+          
+          {/* Row Two */}
+          <div style={{ display: 'flex', flex: '1 1 auto', gap: '20px' }}>
+            <div style={{ display: 'flex', flex: '1 1 50%' }}>
               <RatingCard 
                 title={'Academic Growth'} 
                 rating={96.2}
-                pointsEarned={'57.7'}
-                pointsAvailable={'60'}
+                pointsEarned={57.7}
+                pointsAvailable={60}
                 majorColor='#d73f78'
                 minorColor='#edc8d9'
                 order={2}
                 minor
               />
+            </div>
+            <div style={{ display: 'flex', flex: '1 1 50%' }}>
               <RatingCard 
                 title={'Academic Achievement'} 
                 rating={50.0}
-                pointsEarned={'20.0'}
-                pointsAvailable={'40'}
+                pointsEarned={20.0}
+                pointsAvailable={40}
                 majorColor='#474797'
                 minorColor='#8a8eca'
                 order={3}
@@ -96,24 +102,42 @@ export const Rating: React.FC = () => {
               />
             </div>
           </div>
-          <div style={{ display: 'flex', flex: '1 0 auto', gap: '20px' }}>
-            <Card sx={{ order: 4, flex: '1 1 60%' }} raised>
+          
+          {/* Row Three */}
+          <div>
+            <Card sx={{ order: 4, flex: '1 1 auto' }} raised>
               <CardContent>
                 <Typography variant="h6" component="div"> 
                   Historical Academic Performance
                 </Typography>
               </CardContent>
             </Card>
-            <Card sx={{ order: 5, flex: '1 1 40%' }} raised>
-              <CardContent>
-                <Typography variant="h6" component="div"> 
-                  School Stats
-                </Typography>
-              </CardContent>
-            </Card>
           </div>
         </div> 
-        <div style={{ display: 'flex', flex: '1 1 25%' }}>
+        
+        {/* Column Two */}
+        <div style={{ display: 'flex', flex: '1 1 30%' }}>
+          <Card sx={{ order: 5, flex: '1 1 auto' }} raised>
+            <CardContent>
+              <Typography variant="h6" component="div"> 
+                School Stats
+              </Typography>
+              <StatsTable 
+                schoolWebsite='https://www.wyattacademy.org/'
+                schoolWebsiteAbbreviated='wyattacademy.org'
+                enrollment={189}
+                gradesServed='K-5th'
+                freeReducedLunch={96}
+                minorityStudents={95}
+                englishLearners={51}
+                disabilityStudents={6}
+              />
+            </CardContent>
+          </Card>
+        </div>
+        
+        {/* Column Three */}
+        <div style={{ display: 'flex', flex: '1 1 30%' }}>
           <Card sx={{ order: 6, flex: '1 0 auto' }} raised>
             <CardContent>
               <Typography variant="h6" component="div"> 

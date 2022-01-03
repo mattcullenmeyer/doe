@@ -10,8 +10,8 @@ import { Box } from '@mui/system';
 export interface RatingCardProps {
   title: string;
   rating: number;
-  pointsEarned: string;
-  pointsAvailable: string;
+  pointsEarned: number;
+  pointsAvailable: number;
   majorColor: string;
   minorColor: string;
   order: number;
@@ -28,21 +28,21 @@ export const RatingCard: React.FC<RatingCardProps> = ({
   order,
   minor=false,
 }) => {
-  const size = minor ? 75 : 200;
-  const thickness = minor ? 3 : 6;
-  const titleVariant = minor ? "h4" : "h2";
-  const ratingVariant = minor ? "h6" : "h3";
+  const size = minor ? 95 : 125;
+  const thickness = minor ? 3 : 4;
+  const titleVariant = minor ? "h4" : "h3";
+  const ratingVariant = minor ? "h5" : "h4";
 
   return (
     <Card sx={{ order, flex: '1 0 auto', backgroundColor: {minorColor} }} raised>
       <CardContent> 
-        <Typography variant="h6" component="div"> 
+        <Typography variant="h6" component="div" gutterBottom> 
           {title}
         </Typography>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
           <div>
             <Typography variant={titleVariant} component="div">
-              {`${pointsEarned}/${pointsAvailable}`}
+              {`${pointsEarned.toFixed(0)}/${pointsAvailable}`}
             </Typography>
           </div>
           <div>
