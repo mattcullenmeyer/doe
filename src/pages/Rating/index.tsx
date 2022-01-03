@@ -9,6 +9,7 @@ import { RatingCard } from './components/RatingCard';
 import { School, SuggestedSchools } from './components/SuggestedSchools';
 import { useParams, useLocation } from 'react-router-dom';
 import { StatsTable } from './components/StatsTable';
+import { HistoricalChart } from './components/HistoricalChart';
 
 const schools: School[] = [
   {
@@ -58,14 +59,14 @@ export const Rating: React.FC = () => {
     <Container maxWidth="xl">
       <Typography variant="h4" component="h1">Wyatt Academy</Typography>
       <Typography variant="subtitle1" gutterBottom component="h2">3620 Franklin Street Denver, CO 80205</Typography>
-      <div style={{ display: 'flex', gap: '20px' }}>
+      <div style={{ display: 'flex', gap: '30px', marginTop: '30px' }}>
         {/* Column One */}
         <div style={{ display: 'flex', flex: '1 1 40%', flexFlow: 'column wrap', gap: '20px' }}>
           
           {/* Row One */}
           <div>
             <RatingCard 
-                title='Overall Academic Performance'
+                title='Performance Rating'
                 rating={77.7}
                 pointsEarned={77.7}
                 pointsAvailable={100}
@@ -107,9 +108,10 @@ export const Rating: React.FC = () => {
           <div>
             <Card sx={{ order: 4, flex: '1 1 auto' }} raised>
               <CardContent>
-                <Typography variant="h6" component="div"> 
-                  Historical Academic Performance
+                <Typography variant="h6" component="div" gutterBottom> 
+                  Historical Academics
                 </Typography>
+                <HistoricalChart />
               </CardContent>
             </Card>
           </div>
@@ -138,7 +140,7 @@ export const Rating: React.FC = () => {
         
         {/* Column Three */}
         <div style={{ display: 'flex', flex: '1 1 30%' }}>
-          <Card sx={{ order: 6, flex: '1 0 auto' }} raised>
+          <Card sx={{ order: 6, flex: '1 1 auto' }} raised>
             <CardContent>
               <Typography variant="h6" component="div"> 
                 Suggested Schools
