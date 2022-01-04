@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Card, 
   CardContent, 
@@ -10,6 +10,7 @@ import { School, SuggestedSchools } from './components/SuggestedSchools';
 import { useParams, useLocation } from 'react-router-dom';
 import { StatsTable } from './components/StatsTable';
 import { HistoricalChart } from './components/HistoricalChart';
+import useAxios, { RequestTypes } from '../../services/useAxios';
 
 const schools: School[] = [
   {
@@ -43,6 +44,15 @@ const schools: School[] = [
 ];
 
 export const Rating: React.FC = () => {
+  interface SchoolData {
+    id: string;
+    name: string;
+    address: string;
+    slug: string;
+  }
+  
+  const [schoolData, setSchoolData] = useState<null|SchoolData>(null);
+
   const location = useLocation();
 
   interface Params {
@@ -52,13 +62,29 @@ export const Rating: React.FC = () => {
   const { slug } = useParams<Params>();
 
   useEffect(() => {
-    console.log(`location changed to ${slug}`);
-  }, [location])
+    getData(slug);
+  }, [location]);
+
+  const getData = async (slug: string) => {
+    const response = await useAxios<SchoolData>({
+      path: `school/${slug}`,
+      method: RequestTypes.Get,
+    });
+
+    if (response.status === 200 && response.data) {
+      setSchoolData(response.data);
+    }
+  };
+
+  if (!schoolData) {
+    // TODO: Add Loader here
+    return <></>;
+  }
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" component="h1">Wyatt Academy</Typography>
-      <Typography variant="subtitle1" gutterBottom component="h2">3620 Franklin Street Denver, CO 80205</Typography>
+      <Typography variant="h4" component="h1">{schoolData.name}</Typography>
+      <Typography variant="subtitle1" gutterBottom component="h2">{schoolData.address}</Typography>
       <div style={{ display: 'flex', gap: '30px', marginTop: '30px' }}>
         {/* Column One */}
         <div style={{ display: 'flex', flex: '1 1 40%', flexFlow: 'column wrap', gap: '20px' }}>
