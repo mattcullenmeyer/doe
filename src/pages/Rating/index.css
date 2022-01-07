@@ -1,0 +1,42 @@
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column-one {
+  flex: 1 1 auto;
+}
+
+.column-two {
+  flex: 1 1 auto;
+}
+
+.column-three {
+  flex: 1 1 auto;
+}
+
+.ratings-row-two {
+  flex: 1 1 auto;
+}
+
+@media only screen and (max-width:1380px) {
+  .column-one, .column-two {
+    flex: 1 1 auto;
+  }
+
+  .column-three {
+    flex: 1 0 100%;
+  }
+}
+
+@media only screen and (max-width:1000px) {
+  .column-one, .column-two, .column-three {
+    flex: 1 0 100%;
+  }
+}
+
+@media only screen and (max-width:575px) {
+  .ratings-row-two {
+    flex-flow: column;
+  }
+}

@@ -32,7 +32,7 @@ export const StatsTable: React.FC<StatsTableProps> = ({
 }) => {
   return (
     <TableContainer>
-      <Table>
+      {/* <Table>
         <TableBody>
           <TableRow>
             <TableCell>School Website</TableCell>
@@ -55,7 +55,7 @@ export const StatsTable: React.FC<StatsTableProps> = ({
             <TableCell align="right">{gradesServed}</TableCell>
           </TableRow>
         </TableBody>
-      </Table>
+      </Table> */}
       <Table>
         <TableHead>
           <TableRow>

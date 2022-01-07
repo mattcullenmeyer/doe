@@ -10,28 +10,21 @@ import {
   ListItemText, 
   Typography 
 } from '@mui/material';
+import { NearbySchools } from '..';
 
-export interface School {
-  uid: number;
-  slug: string;
-  name: string;
-  address: string;
-  rating: number;
+export interface Xyz {
+  schools: NearbySchools[];
 }
 
-export interface Schools {
-  schools: School[];
-}
-
-export const SuggestedSchools: React.FC<Schools> = ({ schools }) => {
+export const SuggestedSchools: React.FC<Xyz> = ({ schools }) => {
   return (
     <List>
       {schools.map((school) => {
         return (
-          <ListItem key={school.uid}>
+          <ListItem key={school.id}>
             <ListItemAvatar> 
               <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-                <CircularProgress variant="determinate" value={school.rating} size={40} color="inherit" thickness={2} />
+                <CircularProgress variant="determinate" value={school.nearby.rating} size={40} color="inherit" thickness={2} />
                 <Box
                   sx={{
                     top: 0,
@@ -45,14 +38,14 @@ export const SuggestedSchools: React.FC<Schools> = ({ schools }) => {
                   }}
                 >
                   <Typography variant="subtitle2" component="div">
-                    {`${school.rating.toFixed(0)}%`}
+                    {`${school.nearby.rating.toFixed(0)}%`}
                   </Typography>
                 </Box>
               </Box>
             </ListItemAvatar>
             <ListItemText
-              primary={<Link component={RouterLink} to={`/performance/${school.slug}`}>{school.name}</Link>}
-              secondary={school.address}
+              primary={<Link component={RouterLink} to={`/ratings/${school.nearby.slug}`}>{school.nearby.name}</Link>}
+              secondary={school.nearby.address}
             />
           </ListItem>
         )

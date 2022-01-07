@@ -42,7 +42,7 @@ export const RatingCard: React.FC<RatingCardProps> = ({
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
           <div>
             <Typography variant={titleVariant} component="div">
-              {`${pointsEarned.toFixed(0)}/${pointsAvailable}`}
+              {`${Number(pointsEarned).toFixed(0)}/${Number(pointsAvailable).toFixed(0)}`}
             </Typography>
           </div>
           <div>
@@ -61,7 +61,7 @@ export const RatingCard: React.FC<RatingCardProps> = ({
                 }}
               >
                 <Typography variant={ratingVariant} component="div">
-                  {`${rating.toFixed(0)}%`}
+                  {`${Number(rating).toFixed(0)}%`}
                 </Typography>
               </Box>
             </Box>
