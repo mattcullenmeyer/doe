@@ -12,18 +12,18 @@ export const AutocompleteSearch: React.FC = () => {
 
   const history = useHistory();
 
-  const setData = () => {
+  const setData = async () => {
     setLoading(true);
     setOptions([]);
-    clearTimeout(timeout.current as NodeJS.Timeout);
-    timeout.current = setTimeout( async () => {
-      await new Promise(r => setTimeout(r, 1000));
+    // clearTimeout(timeout.current as NodeJS.Timeout);
+    // timeout.current = setTimeout( async () => {
+      // await new Promise(r => setTimeout(r, 1000));
       const response = await searchSchools({ searchTerm: inputValue });
       if (response.status === 200 && response.data) {
         setOptions(response.data);
         setLoading(false);
       }
-    }, 100);
+    // }, 100);
   };
 
   useEffect(() => {
