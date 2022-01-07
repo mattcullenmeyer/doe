@@ -12,11 +12,11 @@ import {
 } from '@mui/material';
 import { NearbySchools } from '..';
 
-export interface Xyz {
+export interface SuggestedSchoolsProps {
   schools: NearbySchools[];
 }
 
-export const SuggestedSchools: React.FC<Xyz> = ({ schools }) => {
+export const SuggestedSchools: React.FC<SuggestedSchoolsProps> = ({ schools }) => {
   return (
     <List>
       {schools.map((school) => {
