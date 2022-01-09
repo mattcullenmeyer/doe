@@ -34,7 +34,7 @@ export const RatingCard: React.FC<RatingCardProps> = ({
   const ratingVariant = minor ? "h5" : "h4";
 
   return (
-    <Card sx={{ order, flex: '1 0 auto', backgroundColor: {minorColor} }} raised>
+    <Card sx={{ order, flex: '1 0 auto' }} raised>
       <CardContent> 
         <Typography variant="h6" component="div" gutterBottom> 
           {title}
@@ -47,7 +47,14 @@ export const RatingCard: React.FC<RatingCardProps> = ({
           </div>
           <div>
             <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-              <CircularProgress variant="determinate" value={rating} size={size} sx={{ color: majorColor }} thickness={thickness} />
+              <CircularProgress 
+                variant="determinate" 
+                value={rating} 
+                size={size} 
+                // sx={{ color: majorColor }} 
+                color='info'
+                thickness={thickness} 
+              />
               <Box
                 sx={{
                   top: 0,
