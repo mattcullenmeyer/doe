@@ -24,7 +24,13 @@ export const SuggestedSchools: React.FC<SuggestedSchoolsProps> = ({ schools }) =
           <ListItem key={school.id}>
             <ListItemAvatar> 
               <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-                <CircularProgress variant="determinate" value={school.nearby.rating} size={40} color="inherit" thickness={2} />
+                <CircularProgress 
+                  variant="determinate" 
+                  value={Number(school.nearby.rating)} 
+                  size={40} 
+                  color="inherit" 
+                  thickness={2} 
+                />
                 <Box
                   sx={{
                     top: 0,

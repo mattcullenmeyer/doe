@@ -49,7 +49,7 @@ export const RatingCard: React.FC<RatingCardProps> = ({
             <Box sx={{ position: 'relative', display: 'inline-flex' }}>
               <CircularProgress 
                 variant="determinate" 
-                value={rating} 
+                value={Number(rating)} 
                 size={size} 
                 // sx={{ color: majorColor }} 
                 color='info'

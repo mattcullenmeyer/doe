@@ -27,6 +27,12 @@ export interface NearbySchools {
   target: string;
 }
 
+interface NearbySchoolsCursor {
+  next: string;
+  previous: string | null;
+  results: NearbySchools[];
+}
+
 export const Rating: React.FC = () => {
   interface RatingsData {
     overallRating: number;
@@ -82,7 +88,7 @@ export const Rating: React.FC = () => {
   };
 
   const getNearbySchools = async (slug: string) => {
-    const response = await useAxios<NearbySchools[]>({
+    const response = await useAxios<NearbySchoolsCursor>({
       path: 'nearby',
       method: RequestTypes.Get,
       params: {
@@ -91,7 +97,7 @@ export const Rating: React.FC = () => {
     });
 
     if (response.status === 200 && response.data) {
-      setNearbySchools(response.data);
+      setNearbySchools(response.data.results);
     }
   }
 
