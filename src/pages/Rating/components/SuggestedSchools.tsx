@@ -19,7 +19,7 @@ export interface SuggestedSchoolsProps {
 export const SuggestedSchools: React.FC<SuggestedSchoolsProps> = ({ schools }) => {
   return (
     <List>
-      {schools.map((school) => {
+      {schools.slice(0, 4).map((school) => {
         return (
           <ListItem key={school.id}>
             <ListItemAvatar> 
