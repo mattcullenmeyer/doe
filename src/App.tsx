@@ -7,9 +7,10 @@ import ReactGA from 'react-ga';
 
 
 export const App = () => {
-  const TRACKING_ID = "UA-216959703-1";
-  ReactGA.initialize(TRACKING_ID);
-  ReactGA.pageview(window.location.pathname);
+  if (process.env.NODE_ENV === 'production') {
+    ReactGA.initialize("UA-216959703-1");
+    ReactGA.pageview(window.location.pathname);
+  }
   
   return (
     <BrowserRouter>

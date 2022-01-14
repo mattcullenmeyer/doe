@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Box,
   Card, 
@@ -38,6 +38,15 @@ export const RatingCard: React.FC<RatingCardProps> = ({
   const titleVariant = minor ? "h4" : "h3";
   const ratingVariant = minor ? "h5" : "h4";
 
+  const [open, setOpen] = useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <Card sx={{ order, flex: '1 0 auto' }} raised>
       <CardContent> 
@@ -48,9 +57,12 @@ export const RatingCard: React.FC<RatingCardProps> = ({
           <div>
             <Tooltip 
               title={<Typography variant="body2">{tooltip}</Typography>} 
-              sx={{ fontSize: '30px' }
-            }>
-              <IconButton>
+              sx={{ fontSize: '30px' }}
+              PopperProps={{ disablePortal: true, }}
+              onClose={handleTooltipClose}
+              open={open}
+            >
+              <IconButton onClick={handleTooltipOpen}>
                 <HelpIcon />
               </IconButton>
             </Tooltip>

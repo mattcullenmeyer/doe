@@ -223,7 +223,7 @@ export const Rating: React.FC = () => {
           </Card>
         </div>
       </div>
-      <Typography variant="body1" style={{ margin: '30px 0 30px 0' }}>Data is sourced from the{' '}
+      <Typography variant="body1" style={{ margin: '30px 0 30px 0' }}>Data is from the{' '}
         <Link href="https://www.cde.state.co.us/accountability/performanceframeworks" target="_blank" rel="noopener">
           Colorado Department of Education
         </Link>.
