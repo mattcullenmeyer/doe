@@ -1,11 +1,14 @@
 import React from 'react';
 import { 
+  Box,
   Card, 
   CardContent, 
   CircularProgress, 
+  IconButton, 
+  Tooltip, 
   Typography
 } from '@mui/material';
-import { Box } from '@mui/system';
+import HelpIcon from '@mui/icons-material/Help';
 
 export interface RatingCardProps {
   title: string;
@@ -15,6 +18,7 @@ export interface RatingCardProps {
   majorColor: string;
   minorColor: string;
   order: number;
+  tooltip: string;
   minor?: boolean;
 }
 
@@ -26,23 +30,36 @@ export const RatingCard: React.FC<RatingCardProps> = ({
   majorColor,
   minorColor,
   order,
+  tooltip,
   minor=false,
 }) => {
   const size = minor ? 95 : 125;
-  const thickness = minor ? 3 : 4;
+  const thickness = minor ? 4 : 4;
   const titleVariant = minor ? "h4" : "h3";
   const ratingVariant = minor ? "h5" : "h4";
 
   return (
     <Card sx={{ order, flex: '1 0 auto' }} raised>
       <CardContent> 
-        <Typography variant="h6" component="div" gutterBottom> 
-          {title}
-        </Typography>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant="h6" component="div"> 
+            {title}
+          </Typography>
+          <div>
+            <Tooltip 
+              title={<Typography variant="body2">{tooltip}</Typography>} 
+              sx={{ fontSize: '30px' }
+            }>
+              <IconButton>
+                <HelpIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', gap: '15px' }}>
           <div>
             <Typography variant={titleVariant} component="div">
-              {`${Number(pointsEarned).toFixed(0)}/${Number(pointsAvailable).toFixed(0)}`}
+              {`${Number(pointsEarned).toFixed(1)}/${Number(pointsAvailable).toFixed(0)}`}
             </Typography>
           </div>
           <div>
@@ -52,7 +69,7 @@ export const RatingCard: React.FC<RatingCardProps> = ({
                 value={Number(rating)} 
                 size={size} 
                 // sx={{ color: majorColor }} 
-                color='info'
+                color='primary'
                 thickness={thickness} 
               />
               <Box

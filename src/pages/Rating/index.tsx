@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { 
+  Box,
+  Button,
   Card, 
   CardContent, 
+  CircularProgress, 
   Container, 
+  Link, 
   Typography 
 } from '@mui/material';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { RatingCard } from './components/RatingCard';
 import { SuggestedSchools } from './components/SuggestedSchools';
 import { useParams, useLocation } from 'react-router-dom';
@@ -102,14 +107,28 @@ export const Rating: React.FC = () => {
   }
 
   if (!schoolData) {
-    // TODO: Add Loader here
-    return <></>;
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '200px' }}> 
+        <CircularProgress size={100} color='primary' />
+      </Box>
+    )
   }
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" component="h1" style={{ marginTop: '30px' }}>{schoolData.name}</Typography>
-      <Typography variant="subtitle1" gutterBottom component="h2">{schoolData.address}</Typography>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '10px', flexWrap: 'wrap' }}>
+        <div>
+          <h1>{schoolData.name}</h1>
+          <Typography variant="subtitle1" component="h2" style={{ marginBottom: '10px' }}>{schoolData.address}</Typography>
+        </div>
+        <Button 
+          variant="contained" 
+          endIcon={<ExitToAppIcon />}
+          onClick={() => window.open(schoolData.statistics.schoolWebsite)}
+        >
+          School website
+        </Button>
+      </div>
       <div style={{ gap: '30px', marginTop: '30px' }} className='flex-container' >
         {/* Column One */}
         <div style={{ display: 'flex', flexFlow: 'column wrap', gap: '20px' }} className='column-one'>
@@ -123,6 +142,7 @@ export const Rating: React.FC = () => {
                 pointsAvailable={schoolData.ratings.overallAvailable}
                 majorColor='#2f87fc'
                 minorColor='#9ac9f8'
+                tooltip='Official performance ratings for schools are based on the overall percentage of points earned across all performance indicators'
                 order={1}
             />
           </div>
@@ -131,25 +151,27 @@ export const Rating: React.FC = () => {
           <div style={{ display: 'flex', gap: '20px' }} className='ratings-row-two'>
             <div style={{ display: 'flex', flex: '1 1 50%' }}>
               <RatingCard 
-                title={'Academic Growth'} 
+                title={'Growth'} 
                 rating={schoolData.ratings.growthRating}
                 pointsEarned={schoolData.ratings.growthEarned}
                 pointsAvailable={schoolData.ratings.growthAvailable}
                 majorColor='#d73f78'
                 minorColor='#edc8d9'
                 order={2}
+                tooltip='Academic growth is the progress students make on state assessments from one year to the next'
                 minor
               />
             </div>
             <div style={{ display: 'flex', flex: '1 1 50%' }}>
               <RatingCard 
-                title={'Academic Achievement'} 
+                title={'Achievement'} 
                 rating={schoolData.ratings.achievementRating}
                 pointsEarned={schoolData.ratings.achievementEarned}
                 pointsAvailable={schoolData.ratings.achievementAvailable}
                 majorColor='#474797'
                 minorColor='#8a8eca'
                 order={3}
+                tooltip='Academic achievement measures student performance on state assessments in a given year'
                 minor
               />
             </div>
@@ -201,6 +223,11 @@ export const Rating: React.FC = () => {
           </Card>
         </div>
       </div>
+      <Typography variant="body1" style={{ margin: '30px 0 30px 0' }}>Data is sourced from the{' '}
+        <Link href="https://www.cde.state.co.us/accountability/performanceframeworks" target="_blank" rel="noopener">
+          Colorado Department of Education
+        </Link>.
+      </Typography>
     </Container>
   )
 }
